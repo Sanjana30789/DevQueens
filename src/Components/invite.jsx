@@ -8,7 +8,7 @@ const InviteForm = () => {
   const [role, setRole] = useState("");
   const [address,setAddress] = useState("");
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
 
   if (!address || !role) {
@@ -18,26 +18,20 @@ const InviteForm = () => {
 
   try {
     const contract = await getContract();
-    const signer = await contract.runner; // signer connected from MetaMask
-
-    const connectedAddress = await signer.getAddress(); // connected wallet
-    const adminFromContract = await contract.admin();   // admin from contract
-
-    console.log("🔗 Connected Address:", connectedAddress);
-    console.log("👑 Admin Address from contract:", adminFromContract);
-
-    if (connectedAddress.toLowerCase() !== adminFromContract.toLowerCase()) {
-      alert("Only the admin can send invites.");
-      return;
-    }
-
-    const tx = await contract.inviteUser(address, parseInt(role)); // role should be numeric (enum index)
+    const tx = await contract.inviteUser(address, parseInt(role));
     await tx.wait();
+
+    // Save invite to localStorage
+    const invites = JSON.parse(localStorage.getItem("invites")) || [];
+    invites.push({ address, role, timestamp: new Date().toISOString() });
+    localStorage.setItem("invites", JSON.stringify(invites));
+
     alert("✅ Invite sent!");
   } catch (error) {
     console.error("❌ Error sending invite:", error);
   }
 };
+
 
 
   return (

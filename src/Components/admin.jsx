@@ -5,6 +5,7 @@ import AdminSidebar from "../Components/AdminSidebar";
 import "../styling/admin.css";
 
 const AdminDashboard = () => {
+  
   return (
     <div className="admin-dashboard-layout">
       {/* Sidebar on the left */}
@@ -14,6 +15,8 @@ const AdminDashboard = () => {
       <div className="admin-main-content">
         <Outlet /> {/* Dynamic content will be rendered here */}
       </div>
+
+      
     </div>
   );
 };

@@ -1,83 +1,40 @@
-// src/Components/AddProduct.jsx
 import React, { useState } from "react";
-import "../styling/admin.css";
+import { getContract } from "../utils/contractConfig";
 
 const AddProduct = () => {
-  const [productName, setProductName] = useState("");
-  const [productId, setProductId] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [batch, setBatch] = useState("");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
-      reader.readAsDataURL(file);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name || !desc || !batch) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    try {
+      const contract = await getContract();
+      const tx = await contract.createProduct(name, desc, batch);
+      await tx.wait();
+      alert("✅ Product created successfully!");
+      setName("");
+      setDesc("");
+      setBatch("");
+    } catch (err) {
+      console.error("❌ Error creating product:", err);
+      alert("Something went wrong!");
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ productName, productId, description, image });
-    alert("✅ Product Created Successfully!");
-
-    // Reset
-    setProductName("");
-    setProductId("");
-    setDescription("");
-    setImage(null);
-    setPreview(null);
-  };
-
   return (
-    <div className="add-product-container">
-      <h2>Add New Product</h2>
-      <form className="add-product-form" onSubmit={handleSubmit}>
-        <div className="form-row">
-          <input
-            type="text"
-            placeholder="Product Name"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Product ID"
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)}
-            required
-          />
-        </div>
-
-        <textarea
-          placeholder="Product Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows="4"
-          required
-        />
-
-        <div className="image-upload">
-          <label htmlFor="imageUpload">Upload Product Image</label>
-          <input
-            type="file"
-            id="imageUpload"
-            onChange={handleImageChange}
-            accept="image/*"
-            required
-          />
-        </div>
-
-        {preview && (
-          <div className="image-preview">
-            <img src={preview} alt="Preview" />
-          </div>
-        )}
-
+    <div style={{ padding: "2rem" }}>
+      <h2>📦 Add New Product</h2>
+      <form onSubmit={handleSubmit}>
+        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Product Name" />
+        <textarea value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Product Description" />
+        <input value={batch} onChange={(e) => setBatch(e.target.value)} placeholder="Batch ID" />
         <button type="submit">Create Product</button>
       </form>
     </div>

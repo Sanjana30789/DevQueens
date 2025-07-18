@@ -1,75 +1,15 @@
 // src/components/Landing.jsx
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "../styling/landing.css";
 import videoBg from "../assets/supply.mp4";
 import image from "../assets/unnamed.jpg";
 
-const roleMap = {
-  "0xa4c7b4bca6ded7306c3343653085d4df892fe54c": "admin",
-  "0x4ac503cd0db2d943b567b9f18a18960a19792df3": "consumer"
-};
+
 
 const Landing = () => {
-  // const [walletAddress, setWalletAddress] = useState("");
-  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (window.ethereum) {
-  //     window.ethereum.on("accountsChanged", (accounts) => {
-  //       const address = accounts[0];
-  //       setWalletAddress(address);
-  //       const role = roleMap[address.toLowerCase()] || "unknown";
-
-  //       if (role === "admin") {
-  //         navigate("/admin");
-  //       } else if (role === "consumer") {
-  //         navigate("/consumer");
-  //       } else {
-  //         alert("Access denied. Not an authorized admin wallet.");
-  //       }
-  //     });
-  //   }
-  // }, []);
-
-  // const connectWallet = async () => {
-  //   if (loading) return;
-  //   setLoading(true);
-
-  //   try {
-  //     if (window.ethereum) {
-  //       await window.ethereum.request({
-  //         method: "wallet_requestPermissions",
-  //         params: [{ eth_accounts: {} }],
-  //       });
-
-  //       const accounts = await window.ethereum.request({
-  //         method: "eth_requestAccounts",
-  //       });
-
-  //       const address = accounts[0];
-  //       setWalletAddress(address);
-
-  //       const role = roleMap[address.toLowerCase()] || "unknown";
-
-  //       if (role === "admin") {
-  //         navigate("/admin");
-  //       } else if (role === "consumer") {
-  //         navigate("/consumer");
-  //       } else {
-  //         alert("This wallet is not authorized.");
-  //       }
-  //     } else {
-  //       alert("Please install MetaMask.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Wallet connection error:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
+  
  return (
    <>
       <div className="landing">
@@ -81,33 +21,77 @@ const Landing = () => {
        </div>
      </div>
  
-     {/* 👇 Visible below video section */}
-     <section className="info-section">
-       <h2>📦 What is a Supply Chain?</h2>
-       <p>
-         A supply chain is the network of individuals, organizations, resources,
-         activities, and technologies involved in the creation and sale of a
-         product — from supplier to customer.
-       </p>
-     </section>
- 
-     <section className="blockchain-section">
-       <h2>🔐 How Blockchain Helps?</h2>
-       <p>
-         Blockchain provides a decentralized, tamper-proof system that ensures
-         transparency, security, and traceability across every step of the supply
-         chain.
-       </p>
-       <img
-         src={image}
-         alt="Blockchain Supply Chain"
-         className="blockchain-diagram"
-       />
-     </section>
+  
+   <section className="info-section" style={{ background: "linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%)" }}>
+  <div className="content-wrapper">
+    <div className="text-content animate-slide-left">
+      <h2>📦 What is a Supply Chain?</h2>
+      <p>
+        A supply chain is the comprehensive network of individuals, organizations, 
+        resources, activities, and technologies involved in the creation and 
+        distribution of a product — from raw material suppliers to end customers.
+      </p>
+      <p className="additional-text">
+        Modern supply chains span continents and involve complex logistics. 
+        Traditional systems often suffer from opacity, inefficiency, and vulnerability 
+        to fraud. This is where blockchain technology revolutionizes the process.
+      </p>
+      <div className="feature-list">
+        <div className="feature-item" style={{ background: "rgba(255,255,255,0.7)" }}>
+          <span className="feature-icon">🌐</span>
+          <span>Global network visibility</span>
+        </div>
+        <div className="feature-item" style={{ background: "rgba(255,255,255,0.7)" }}>
+          <span className="feature-icon">⏱️</span>
+          <span>Real-time tracking</span>
+        </div>
+        <div className="feature-item" style={{ background: "rgba(255,255,255,0.7)" }}>
+          <span className="feature-icon">🔍</span>
+          <span>End-to-end transparency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section className="blockchain-section" style={{ background: "linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%)" }}>
+  <div className="content-wrapper reverse">
+    <div className="text-content animate-slide-right">
+      <h2>🔐 How Blockchain Helps?</h2>
+      <p>
+        Blockchain technology provides a decentralized, immutable ledger system 
+        that ensures complete transparency, enhanced security, and verifiable 
+        traceability across every step of the supply chain.
+      </p>
+      <p className="additional-text">
+        Each transaction or movement is recorded as a block in the chain, creating 
+        an unforgeable history of the product's journey. This eliminates disputes, 
+        reduces fraud, and builds trust among all stakeholders.
+      </p>
+      <ul className="benefits-list">
+        <li>✔️ Tamper-proof record keeping</li>
+        <li>✔️ Smart contract automation</li>
+        <li>✔️ Reduced paperwork and errors</li>
+        <li>✔️ Instant verification of authenticity</li>
+      </ul>
+    </div>
+    <div className="image-container animate-fade-in">
+      <img
+        src={image}
+        alt="Blockchain Supply Chain"
+        className="blockchain-diagram"
+        style={{ border: "8px solid white", boxShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
+      />
+      <div className="image-caption" style={{ color: "#2c3e50" }}>
+        Blockchain ensures every step is recorded and verifiable
+      </div>
+    </div>
+  </div>
+</section>
  
      <footer className="footer">
        <p>
-         &copy; {new Date().getFullYear()} SupplyChainX | Built with 💡 by Sanjana
+         &copy; {new Date().getFullYear()} SupplyChainX | Built with 💡 by DevQueens
        </p>
      </footer>
    </>

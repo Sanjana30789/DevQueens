@@ -59,34 +59,186 @@
   transform: scale(1.05);
 }
 
+/* Content Sections */
+/* Content Sections */
 .info-section, .blockchain-section {
-  padding: 50px 20px;
-  background: #f9f9f9;
-  text-align: center;
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-.info-section h2,
-.blockchain-section h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #333;
+.info-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
 }
 
-.info-section p,
-.blockchain-section p {
-  max-width: 800px;
+.blockchain-section {
+  background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+}
+
+/* Add decorative elements */
+.info-section::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.blockchain-section::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  background: rgba(33, 150, 243, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.content-wrapper {
+  max-width: 1200px;
   margin: 0 auto;
-  font-size: 1.1rem;
-  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Text Content */
+.text-content {
+  flex: 1;
+  min-width: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+h2 {
+  font-size: 2.3rem;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 4px;
+  background: #4CAF50;
+  bottom: -10px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.blockchain-section h2::after {
+  background: #2196F3;
+}
+
+/* Image Container */
+.image-container {
+  flex: 1;
+  min-width: 45%;
+  position: relative;
 }
 
 .blockchain-diagram {
-  margin-top: 25px;
-  max-width: 80%;
-  height: auto;
+  width: 100%;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
 }
+
+/* Feature List */
+.feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Benefits List */
+.benefits-list {
+  margin-top: 25px;
+}
+
+.benefits-list li {
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 30px;
+  font-size: 1.05rem;
+}
+
+.benefits-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.blockchain-section .benefits-list li::before {
+  color: #2196F3;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 
 .footer {
   background-color: #222;

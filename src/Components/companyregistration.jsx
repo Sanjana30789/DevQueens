@@ -1,17 +1,38 @@
 // src/pages/CompanyRegistration.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styling/company.css";
 
 const CompanyRegistration = () => {
   const [companyName, setCompanyName] = useState("");
   const [description, setDescription] = useState("");
   const [document, setDocument] = useState(null);
+  const [wallet, setWallet] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkExistingRequest = async () => {
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const currentWallet = accounts[0].toLowerCase();
+      setWallet(currentWallet);
+
+      const requests = JSON.parse(localStorage.getItem("companyRequests")) || [];
+      const existing = requests.find(req => req.wallet.toLowerCase() === currentWallet);
+
+      if (existing) {
+        console.log("🔁 Redirecting to dashboard as request exists for:", currentWallet);
+        navigate("/companydashboard");
+      }
+    };
+
+    checkExistingRequest();
+  }, []);
 
   const handleFileChange = (e) => {
     setDocument(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!companyName || !description || !document) {
@@ -19,12 +40,19 @@ const CompanyRegistration = () => {
       return;
     }
 
-    // For now just show console
-    console.log("Company Name:", companyName);
-    console.log("Description:", description);
-    console.log("Document File:", document);
+    const companyRequest = {
+      name: companyName,
+      description,
+      status: "pending",
+      wallet: wallet,
+    };
 
-    alert("Request submitted for verification!");
+    let requests = JSON.parse(localStorage.getItem("companyRequests")) || [];
+    requests.push(companyRequest);
+    localStorage.setItem("companyRequests", JSON.stringify(requests));
+
+    alert("✅ Request submitted for verification!");
+    navigate("/companydashboard");
   };
 
   return (
