@@ -1,0 +1,74 @@
+.scanner-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.scanner-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+.product-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.product-id {
+  color: #666;
+  font-family: monospace;
+  word-break: break-all;
+}
+
+.detail-section {
+  margin-bottom: 2rem;
+}
+
+.detail-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  min-width: 150px;
+  color: #555;
+}
+
+.verification-badge {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f8f8f8;
+}
+
+.verification-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.verification-icon.verified {
+  background: #4CAF50;
+  color: white;
+}
+
+.verification-icon.unverified {
+  background: #F44336;
+  color: white;
+}
