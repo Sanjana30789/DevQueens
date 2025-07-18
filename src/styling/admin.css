@@ -1,0 +1,157 @@
+/* Layout */
+.admin-dashboard-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 220px;
+  background-color: #1f2937;
+  color: white;
+  padding: 20px;
+}
+
+.admin-sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.admin-sidebar nav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 12px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.admin-sidebar nav a.active,
+.admin-sidebar nav a:hover {
+  background-color: #2563eb;
+}
+
+/* Content */
+.admin-main-content {
+  flex-grow: 1;
+  padding: 30px;
+  background-color: #f3f4f6;
+  overflow-y: auto;
+}
+
+
+.add-product-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+.add-product-container h2 {
+  margin-bottom: 20px;
+  font-size: 1.7rem;
+  color: #111827;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+.add-product-form input,
+.add-product-form textarea {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.add-product-form textarea {
+  resize: vertical;
+}
+
+.image-upload label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  color: #374151;
+}
+
+.image-preview img {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-form button {
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-product-form button:hover {
+  background-color: #1e40af;
+}
+
+
+.qr-generator {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.qr-generator input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.qr-generator button {
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qr-preview {
+  margin-top: 20px;
+}
+
+.qr-url {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+  word-break: break-all;
+}
