@@ -5,7 +5,7 @@ import AdminSidebar from "../Components/AdminSidebar";
 
 import SupplyChainArtifact from "../../blockchain/artifacts/contracts/SupplyChain.sol/SupplyChain.json";
 
-const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x7432DE22B2a94F3a8d0184815448E3Ee67E3C4D3"; // Double-check this address!
+const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0xc65252fC5348ad0D64D7C84C29Ee76297d22B106"; // Double-check this address!
 
 const CompanyDashboard = () => {
   const [companyDetails, setCompanyDetails] = useState(null);

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'; // For navigating to product det
 import '../styling/allproducts.css'; // New CSS file for this component
 
 // Replace with your actual deployed contract address
-const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x6737b8F44193b282745aAE70944bFCa1d8B64aE2";
+const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0xc65252fC5348ad0D64D7C84C29Ee76297d22B106";
 
 const ITEMS_PER_PAGE = 10; // Number of products to display per page
 

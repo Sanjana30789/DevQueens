@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 
 import SupplyChain from "../../blockchain/artifacts/contracts/SupplyChain.sol/SupplyChain.json";
 
-export const CONTRACT_ADDRESS = "0x7432DE22B2a94F3a8d0184815448E3Ee67E3C4D3"; 
+export const CONTRACT_ADDRESS = "0xc65252fC5348ad0D64D7C84C29Ee76297d22B106"; 
 
 export async function getContract() {
   if (!window.ethereum) throw new Error("MetaMask not detected");

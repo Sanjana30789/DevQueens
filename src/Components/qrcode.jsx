@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 import SupplyChainArtifact from '../../blockchain/artifacts/contracts/SupplyChain.sol/SupplyChain.json';
 import '../styling/qrcode.css'; // Ensure this CSS file exists and is robust
 
-const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x6737b8F44193b282745aAE70944bFCa1d8B64aE2"; // Your actual deployed contract address
+const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0xc65252fC5348ad0D64D7C84C29Ee76297d22B106"; // Your actual deployed contract address
 
 // Helper function to format timestamps
 const formatTimestamp = (timestamp) => {
