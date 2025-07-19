@@ -10,6 +10,8 @@ import CompanyRegistration from './Components/companyregistration';
 import AdminVerify from './Components/adminverify';
 import CompanyDashboard from './Components/Company';
 import ProductForm from "./Components/ProductForm";
+import AllProducts from "./Components/allproducts";
+import UpdateProduct from "./Components/UpdateProduct";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="add-product" element={<ProductForm />} />
         <Route path="inviteform" element={<InviteForm />} />
         <Route path = "qr" element={<QRScanner/>}/>
+        <Route path="products" element={<AllProducts />} />
+        <Route path="update-products" element={<UpdateProduct/>}/>
         
       </Route>
     </Routes>

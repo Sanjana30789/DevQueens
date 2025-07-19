@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import '../styling/ProductForm.css';
 import SupplyChainArtifact from '../../blockchain/artifacts/contracts/SupplyChain.sol/SupplyChain.json';
 
-const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x6737b8F44193b282745aAE70944bFCa1d8B64aE3";
+const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x7432DE22B2a94F3a8d0184815448E3Ee67E3C4D3";
 const HARDCODED_SUPPLY_CHAIN_ID = "0"; // Must be a number (uint256)
 
 const ProductForm = () => {
@@ -86,7 +86,9 @@ const ProductForm = () => {
         data.productName,
         data.description,
         data.batchNumber,
-        HARDCODED_SUPPLY_CHAIN_ID
+        HARDCODED_SUPPLY_CHAIN_ID,
+        hash,
+        Math.floor(new Date(data.productionDate).getTime() / 1000)
       );
 
       // Wait for transaction confirmation

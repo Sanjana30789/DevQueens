@@ -45,17 +45,22 @@ contract SupplyChain {
     mapping(address => bool) public invited;
     mapping(address => bool) public accepted;
 
+    // NEW: Mapping to track if a specific company has invited a specific user
+    mapping(uint256 => mapping(address => bool)) public companyHasInvitedUser;
+
     // --- Events ---
     event CompanyRegistered(uint256 companyId, string name, address indexed walletAddress);
     event CompanyVerified(uint256 companyId, string name, address indexed walletAddress);
     event ProductCreated(uint productId, string name, uint256 indexed creatorCompanyId, uint256 indexed supplyChainId, string productHash);
-    event UserInvited(address indexed user, Role role);
+    event UserInvited(address indexed user, Role role); // Existing event
     event UserAccepted(address indexed user, Role role);
     event NewSupplyChainCreated(uint256 supplyChainId, address indexed creator);
+    // NEW: Event for when a company invites a user
+    event CompanyInvitedUser(uint256 indexed inviterCompanyId, address indexed invitedUser, Role role);
 
     constructor() {
         admin = msg.sender;
-        roles[admin] = Role.None;
+        roles[admin] = Role.None; // Admin typically doesn't have a specific role in the enum initially, unless defined.
         nextCompanyId = 1;
         productCounter = 0;
     }
@@ -124,10 +129,12 @@ contract SupplyChain {
         string memory _productHash,
         uint256 _productionDate
     ) public onlyVerifiedCompany {
-        require(bytes(_productHash).length == 64, "Invalid product hash");
+        // Added this require to ensure product hash uniqueness. If you removed it, consider adding it back!
+        require(hashToProductId[_productHash] == 0, "Product with this hash already exists."); 
+        require(bytes(_productHash).length == 64, "Invalid product hash length (must be 64 characters)");
         require(bytes(_name).length > 0, "Name cannot be empty");
         require(bytes(_batchId).length > 0, "Batch ID cannot be empty");
-        require(_productionDate <= block.timestamp, "Invalid production date");
+        require(_productionDate <= block.timestamp, "Invalid production date (cannot be in the future)");
 
         uint256 creatorCompanyId = walletToCompanyId[msg.sender];
         productCounter++;
@@ -192,16 +199,48 @@ contract SupplyChain {
         return productsBySupplyChainId[_supplyChainId];
     }
 
-    // --- Role Management Functions ---
+    // --- Role Management Functions (Admin and Company) ---
+
+    // Original invite function, accessible only by the admin
     function inviteUser(address user, Role role) public onlyAdmin {
         require(roles[user] == Role.None, "User already has a role");
+        require(role != Role.None, "Cannot invite to 'None' role"); // Added check
         roles[user] = role;
         invited[user] = true;
         emit UserInvited(user, role);
     }
 
+    // NEW: Function to allow a verified company to invite a user to a specific role
+    function inviteUserByCompany(address _user, Role _role) public onlyVerifiedCompany {
+        // Ensure the invited user does not already have a role
+        require(roles[_user] == Role.None, "User already has a role.");
+        
+        // Disallow inviting Role.None (0)
+        require(_role != Role.None, "Cannot invite to 'None' role.");
+
+        // Optionally, prevent a company from inviting itself to a new role (e.g., if it's already a verified company)
+        // require(_user != msg.sender, "Cannot invite yourself.");
+
+        // Prevent the same company from inviting the same user multiple times
+        uint256 inviterCompanyId = walletToCompanyId[msg.sender];
+        require(!companyHasInvitedUser[inviterCompanyId][_user], "This company has already invited this user.");
+
+        roles[_user] = _role;       // Assign the role
+        invited[_user] = true;      // Mark as invited, so they can accept
+
+        // Record that this company has invited this user
+        companyHasInvitedUser[inviterCompanyId][_user] = true;
+
+        emit CompanyInvitedUser(inviterCompanyId, _user, _role); // Emit the new event
+        emit UserInvited(_user, _role); // Also emit the general UserInvited event
+    }
+
     function acceptInvite() public {
         require(invited[msg.sender], "Not invited");
+        // Ensure they haven't already accepted an invite and have an assigned role
+        require(!accepted[msg.sender], "Invite already accepted."); // Added check
+        require(roles[msg.sender] != Role.None, "No role assigned for this invite."); // Added check
+
         accepted[msg.sender] = true;
         emit UserAccepted(msg.sender, roles[msg.sender]);
     }

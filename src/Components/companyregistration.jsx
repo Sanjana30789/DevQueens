@@ -9,7 +9,7 @@ import "../styling/company.css";
 import SupplyChainArtifact from "../../blockchain/artifacts/contracts/SupplyChain.sol/SupplyChain.json";
 
 // Replace with the actual deployed address of your SupplyChain.sol contract
-const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x9c3A2B154B534aF1C6925A119Cba00C3cc6251Ca"; // Ensure this is correct and updated
+const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x7432DE22B2a94F3a8d0184815448E3Ee67E3C4D3"; // Ensure this is correct and updated
 
 // REMOVED: WEB3_STORAGE_TOKEN constant
 

@@ -6,7 +6,7 @@ import { ethers } from "ethers";
 import SupplyChainArtifact from "../../blockchain/artifacts/contracts/SupplyChain.sol/SupplyChain.json"; // Renamed to Artifact for clarity
 
 // Replace with the actual deployed address of your SupplyChain.sol contract
-const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x9c3A2B154B534aF1C6925A119Cba00C3cc6251Ca"; // <<-- UPDATE THIS WITH YOUR LATEST DEPLOYED ADDRESS
+const SUPPLY_CHAIN_CONTRACT_ADDRESS = "0x7432DE22B2a94F3a8d0184815448E3Ee67E3C4D3"; // <<-- UPDATE THIS WITH YOUR LATEST DEPLOYED ADDRESS
 
 const AdminVerify = () => {
   const [pendingCompanies, setPendingCompanies] = useState([]);
